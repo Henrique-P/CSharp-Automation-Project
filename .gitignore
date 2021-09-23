@@ -10,6 +10,9 @@
 *.userosscache
 *.sln.docstates
 
+# Arquivos ignorados do projeto
+*.png
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
