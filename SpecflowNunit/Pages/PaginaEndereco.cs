@@ -22,7 +22,6 @@ namespace SpecflowNunit.Pages
         public void ProximaPage()
         {
             proximaPage.Click();
-            //webDriver.Navigate().GoToUrl("http://automationpractice.com/index.php?controller=order&step=2");
         }
     }
 }

@@ -11,8 +11,7 @@ Funcionalidade: Testar a compra de um produto de ponta a ponta.
 @endtoend
   Cenario: Fazer um pedido.
     Dado que estou logado e na pagina home
-    Quando clico na pagina de um produto
-    E adiciono o produto ao carrinho
+    Quando adiciono o produto numero '1' da home page ao carrinho
     E prossigo até o carrinho
     E prossigo para a pagina de endereço
     E prossigo para a pagina de forma de entrega

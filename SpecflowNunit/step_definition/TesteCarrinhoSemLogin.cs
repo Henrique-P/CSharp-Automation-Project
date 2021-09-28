@@ -2,13 +2,12 @@
 using OpenQA.Selenium;
 using SpecflowNunit.Pages;
 using System;
-using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace SpecflowNunit.step_definition
 {
     [Binding]
-    public class NoLoginSteps
+    public class TesteCarrinhoSemLogin
     {
         private ScenarioContext context;
         private IWebDriver webDriver;
@@ -16,7 +15,7 @@ namespace SpecflowNunit.step_definition
         private PaginaCarrinho paginaCarrinho;
         private PaginaProduto paginaProduto;
 
-        public NoLoginSteps(ScenarioContext context)
+        public TesteCarrinhoSemLogin(ScenarioContext context)
         {
             this.context = context;
             webDriver = this.context["WEB_DRIVER"] as IWebDriver;
@@ -31,17 +30,18 @@ namespace SpecflowNunit.step_definition
             homePage.PaginaInicial();
         }
 
-        [When(@"clico na pagina de um produto")]
-        public void QuandoClicoNaPaginaDeUmProduto()
+        [When(@"adiciono o produto numero '(.*)' da home page ao carrinho")]
+        public void QuandoAdicionoOProdutoNumeroDaHomePageAoCarrinho(int indexProduto)
         {
-            homePage.ClicarProduto1();
+            homePage.AdicionarProdutoAoCarrinho(indexProduto);
         }
 
-        [When(@"adiciono o produto ao carrinho")]
+
+        /*[When(@"adiciono o produto ao carrinho")]
         public void QuandoAdicionoOProdutoAoCarrinho()
         {
-            paginaProduto.AdicionarAoCarrinho();
-        }
+            homePage.AdicionarProdutoAoCarrinho(1);
+        }*/
 
         [When(@"prossigo até o carrinho")]
         public void QuandoProssigoAteOCarrinho()
@@ -52,7 +52,7 @@ namespace SpecflowNunit.step_definition
         [When(@"removo o item do carrinho")]
         public void QuandoORemovoDoCarrinho()
         {
-            paginaCarrinho.DeletarProduto1();
+            paginaCarrinho.LimparCarrinho();
         }
         
         [Then(@"devo ver '(.*)' no carrinho")]
@@ -67,27 +67,42 @@ namespace SpecflowNunit.step_definition
             paginaProduto.ContinuarComprando();
         }
 
-        [When(@"retorno a Home")]
-        public void QuandoRetornoAHome()
+        /*[When(@"adiciono um segundo produto ao carrinho")]
+        public void QuandoAdicionoUmSegundoProdutoAoCarrinho()
         {
-            paginaProduto.VoltarHome();
-        }
-
-
-        [When(@"clico na segunda pagina de um produto")]
-        public void QuandoClicoNaSegundaPaginaDeUmProduto()
-        {
-            homePage.ClicarProduto2();
-        }
+            homePage.AdicionarProdutoAoCarrinho(2);
+        }*/
 
         [When(@"removo ambos itens do carrinho")]
         public void QuandoRemovoAmbosItensDoCarrinho()
         {
-            paginaCarrinho.DeletarProduto1();
-            //Thread.Sleep(1000);
-            paginaCarrinho.DeletarProduto2();
+            paginaCarrinho.LimparCarrinho();
         }
 
+        [When(@"clico na pagina de um produto")]
+        public void QuandoClicoNaPaginaDeUmProduto()
+        {
+            homePage.ClicaPaginaProduto(1);
+        }
+
+        [When(@"clico em Add to Cart")]
+        public void QuandoClicoEmAddToCart()
+        {
+            paginaProduto.AdicionarAoCarrinho();
+        }
+
+
+        [When(@"altero sua cor")]
+        public void QuandoAlteroSuaCor()
+        {
+            paginaProduto.SelecionaCor(1);
+        }
+
+        [Then(@"devo ver '(.*)' no produto dentro do carrinho")]
+        public void EntaoDevoVerProdutoDentroDoCarrinho(string mensagemValidacao)
+        {
+            Assert.True(paginaCarrinho.ValidaDetalhes().Equals(mensagemValidacao));
+        }
 
 
     }

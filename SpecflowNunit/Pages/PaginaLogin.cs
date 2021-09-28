@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SpecflowNunit.Pages
 {
-    public class Login
+    public class PaginaLogin
     {
         private IWebDriver webDriver;
         [FindsBy(How = How.Id, Using = "email")]
@@ -21,7 +21,7 @@ namespace SpecflowNunit.Pages
         [FindsBy(How = How.CssSelector, Using = "#center_column > div.alert.alert-danger > ol > li")]
         public IWebElement mensagemAlerta;
             
-        public Login(IWebDriver webDriver)
+        public PaginaLogin(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
             PageFactory.InitElements(this.webDriver, this);

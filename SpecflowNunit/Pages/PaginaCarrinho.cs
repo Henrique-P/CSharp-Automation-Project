@@ -11,18 +11,20 @@ namespace SpecflowNunit.Pages
     public class PaginaCarrinho
     {
         private IWebDriver webDriver;
-        
-        [FindsBy(How = How.Id, Using = "1_1_0_0")]
-        public IWebElement botaodeletarProduto1;
-
-        [FindsBy(How = How.Id, Using = "2_7_0_0")]
-        public IWebElement botaodeletarProduto2;
 
         [FindsBy(How = How.CssSelector, Using = "p.alert")]
         public IWebElement mensagemDeAlerta;
 
         [FindsBy(How = How.ClassName, Using = "standard-checkout")]
         public IWebElement proximaPage;
+
+        [FindsBy(How = How.CssSelector, Using = "a[title = 'Delete']")]
+        public IList <IWebElement> botoesLixeira;
+
+        [FindsBy(How = How.CssSelector, Using = "#order-detail-content small a")]
+        public IWebElement detalhesProduto;
+
+
 
         public PaginaCarrinho(IWebDriver webDriver)
         {
@@ -39,19 +41,22 @@ namespace SpecflowNunit.Pages
             return mensagemDeAlerta.Text;
         }
 
-        public void DeletarProduto1()
-        {
-            botaodeletarProduto1.Click();
-        }
-
-        public void DeletarProduto2()
-        {
-            botaodeletarProduto2.Click();
-        }
-
         public void ProximaPage()
         {
             proximaPage.Click();
+        }
+
+        public void LimparCarrinho()
+        {
+            foreach(var botao in botoesLixeira)
+            {
+                botao.Click();
+            }
+        }
+
+        public string ValidaDetalhes()
+        {
+            return detalhesProduto.Text;
         }
     }
 }

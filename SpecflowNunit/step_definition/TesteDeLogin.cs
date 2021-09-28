@@ -7,18 +7,18 @@ using TechTalk.SpecFlow;
 namespace SpecflowNunit.step_definition
 {
     [Binding]
-    public class LoginSteps
+    public class TesteDeLogin
     {
         private ScenarioContext context;
         private IWebDriver webDriver;
-        private Login loginPage;
+        private PaginaLogin loginPage;
         private AreaLogada areaLogadaPage;
 
-        public LoginSteps(ScenarioContext context)
+        public TesteDeLogin(ScenarioContext context)
         {
             this.context = context;
             webDriver = this.context["WEB_DRIVER"] as IWebDriver;
-            loginPage = new Login(webDriver);
+            loginPage = new PaginaLogin(webDriver);
             areaLogadaPage = new AreaLogada(webDriver);
         }
 

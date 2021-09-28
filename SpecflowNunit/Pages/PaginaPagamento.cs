@@ -13,8 +13,8 @@ namespace SpecflowNunit.Pages
         [FindsBy(How = How.ClassName, Using = "bankwire")]
         public IWebElement bankwire;
 
-        [FindsBy(How = How.CssSelector, Using = "#cart_navigation > button")]
-        public IWebElement iConfirmMyOrder;
+        [FindsBy(How = How.CssSelector, Using = "#cart_navigation > button")] //#cart_navigation button[type='submit']
+        public IWebElement iConfirmMyOrder;   ////span[contains(text(),'I confirm my order')]//..//..//button
 
         [FindsBy(How = How.CssSelector, Using = "#center_column > div > p > strong")]
         public IWebElement mensagemSucesso;

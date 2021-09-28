@@ -24,6 +24,9 @@ namespace SpecflowNunit.Pages
         [FindsBy(How = How.ClassName, Using = "home")]
         public IWebElement voltarHome;
 
+        [FindsBy(How = How.CssSelector, Using = "ul#color_to_pick_list")]
+        public IWebElement listaCores;
+
         public PaginaProduto(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
@@ -35,10 +38,8 @@ namespace SpecflowNunit.Pages
         }
         public void IrParaCarrinho()
         {
-            //Thread.Sleep(10000);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
             wait.Until(ExpectedConditions.ElementToBeClickable(irParaCarrinho)).Click();
-            //irParaCarrinho.Click();
         }
 
         public void ContinuarComprando()
@@ -49,6 +50,16 @@ namespace SpecflowNunit.Pages
         public void VoltarHome()
         {
             voltarHome.Click();
+        }
+
+        public IList<IWebElement> CapturarListaDeCores()
+        {
+            return listaCores.FindElements(By.CssSelector("a"));
+        }
+
+        public void SelecionaCor(int corProduto)
+        {
+            CapturarListaDeCores()[corProduto].Click();
         }
     }
 }

@@ -127,30 +127,27 @@ namespace SpecflowNunit.Features
     testRunner.Given("que estou logado e na pagina home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 14
-    testRunner.When("clico na pagina de um produto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+    testRunner.When("adiciono o produto numero \'1\' da home page ao carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 15
-    testRunner.And("adiciono o produto ao carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 16
     testRunner.And("prossigo até o carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 17
+#line 16
     testRunner.And("prossigo para a pagina de endereço", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 18
+#line 17
     testRunner.And("prossigo para a pagina de forma de entrega", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 19
+#line 18
     testRunner.And("prossigo para a pagina de forma de pagamento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 20
+#line 19
     testRunner.And("seleciono a forma de pagamento Bankwire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 21
+#line 20
     testRunner.And("clico em Finalizar pedido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 22
+#line 21
     testRunner.Then("devo ver \'Your order on My Store is complete.\' na pagina final", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }

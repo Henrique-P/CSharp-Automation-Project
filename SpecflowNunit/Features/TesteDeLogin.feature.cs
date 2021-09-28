@@ -20,22 +20,22 @@ namespace SpecflowNunit.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Testar o carrinho sem o login prévio")]
-    public partial class TestarOCarrinhoSemOLoginPrevioFeature
+    [NUnit.Framework.DescriptionAttribute("Testar a funcionalidade de login")]
+    public partial class TestarAFuncionalidadeDeLoginFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "CarrinhoSemLogin.feature"
+#line 1 "TesteDeLogin.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt"), "Features", "Testar o carrinho sem o login prévio", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt"), "Features", "Testar a funcionalidade de login", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -73,26 +73,17 @@ namespace SpecflowNunit.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 6
-  #line hidden
-#line 7
-    testRunner.Given("que estou na pagina home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adicionar um produto ao carrinho e então o remover")]
-        [NUnit.Framework.CategoryAttribute("test3")]
-        public virtual void AdicionarUmProdutoAoCarrinhoEEntaoORemover()
+        [NUnit.Framework.DescriptionAttribute("Teste positivo do login")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
+        public virtual void TestePositivoDoLogin()
         {
             string[] tagsOfScenario = new string[] {
-                    "test3"};
+                    "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adicionar um produto ao carrinho e então o remover", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 10
-  this.ScenarioInitialize(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Teste positivo do login", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 5
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -112,38 +103,37 @@ namespace SpecflowNunit.Features
             {
                 this.ScenarioStart();
 #line 6
-  this.FeatureBackground();
+ testRunner.Given("que estou na pagina de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 11
-    testRunner.When("clico na pagina de um produto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line 7
+    testRunner.When("preencho os campos email e senha com \"novoemailteste@gmail.com\" e \"teste123\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 12
-    testRunner.And("adiciono o produto ao carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line 8
+    testRunner.And("clico em Sign in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 13
-    testRunner.And("prossigo até o carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 14
-    testRunner.And("removo o item do carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 15
-    testRunner.Then("devo ver \'Your shopping cart is empty.\' no carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line 9
+    testRunner.Then("devo ver \"MY ACCOUNT\" na área logada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adicionar dois produtos ao carrinho e então os remover")]
-        [NUnit.Framework.CategoryAttribute("test4")]
-        public virtual void AdicionarDoisProdutosAoCarrinhoEEntaoOsRemover()
+        [NUnit.Framework.DescriptionAttribute("Teste negativo de login")]
+        [NUnit.Framework.TestCaseAttribute("\"novoemailteste@gmail.com\"", "\"senha incorreta\"", "\"Authentication failed.\"", null)]
+        [NUnit.Framework.TestCaseAttribute("\"usuário incorreto\"", "\"teste123\"", "\"Invalid email address.\"", null)]
+        [NUnit.Framework.TestCaseAttribute("\"\"", "\"teste123\"", "\"An email address required.\"", null)]
+        [NUnit.Framework.TestCaseAttribute("\"novoemailteste@gmail.com\"", "\"\"", "\"Password is required.\"", null)]
+        public virtual void TesteNegativoDeLogin(string email, string senha, string alerta, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "test4"};
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adicionar dois produtos ao carrinho e então os remover", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 18
-  this.ScenarioInitialize(scenarioInfo);
+            argumentsOfScenario.Add("email", email);
+            argumentsOfScenario.Add("senha", senha);
+            argumentsOfScenario.Add("alerta", alerta);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Teste negativo de login", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 11
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -162,35 +152,17 @@ namespace SpecflowNunit.Features
             else
             {
                 this.ScenarioStart();
-#line 6
-  this.FeatureBackground();
+#line 12
+    testRunner.Given("que estou na pagina de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 19
-    testRunner.When("clico na pagina de um produto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line 13
+    testRunner.When(string.Format("preencho os campos email e senha com {0} e {1}", email, senha), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 20
-    testRunner.And("adiciono o produto ao carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line 14
+    testRunner.And("clico em Sign in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
-#line 21
-    testRunner.And("seleciono Continue shopping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 22
-    testRunner.And("retorno a Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 23
-    testRunner.And("clico na segunda pagina de um produto", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 24
-    testRunner.And("adiciono o produto ao carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 25
-    testRunner.And("prossigo até o carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 26
-    testRunner.And("removo ambos itens do carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
-#line hidden
-#line 27
-    testRunner.Then("devo ver \'Your shopping cart is empty.\' no carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line 15
+    testRunner.Then(string.Format("devo ver uma mensagem {0}", alerta), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

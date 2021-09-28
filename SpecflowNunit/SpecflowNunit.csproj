@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Features\Login.feature.cs">
-      <DependentUpon>Login.feature</DependentUpon>
+    <Compile Update="Features\TesteDeLogin.feature.cs">
+      <DependentUpon>TesteDeLogin.feature</DependentUpon>
     </Compile>
   </ItemGroup>
 
