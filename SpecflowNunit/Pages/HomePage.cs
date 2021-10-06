@@ -21,12 +21,10 @@ namespace SpecflowNunit.Pages
         public IWebElement listaProdutos;
 
         [FindsBy(How = How.CssSelector, Using = "li.hovered a[class*='add_to_cart']")]
-        public IWebElement botaoAddToCart;
+        public IWebElement botaoAddToCartHover;
 
         [FindsBy(How = How.CssSelector, Using = "li.hovered a[class*='lnk_view']")]
         public IWebElement botaoAbrePaginaProduto;
-
-
 
         public HomePage(IWebDriver webDriver)
         {
@@ -38,13 +36,13 @@ namespace SpecflowNunit.Pages
         public void ClicarProduto1()
         {
             action.MoveToElement(GetProdutosNaLista()[0]).Perform();
-            botaoAddToCart.Click();
+            botaoAddToCartHover.Click();
         }
 
         public void ClicarProduto2()
         {
             action.MoveToElement(GetProdutosNaLista()[1]).Perform();
-            botaoAddToCart.Click();
+            botaoAddToCartHover.Click();
         }
 
         public void PaginaInicial()
@@ -60,13 +58,19 @@ namespace SpecflowNunit.Pages
         public void AdicionarProdutoAoCarrinho(int indexProduto)
         {
             action.MoveToElement(GetProdutosNaLista()[indexProduto - 1]).Perform();
-            botaoAddToCart.Click();
+            botaoAddToCartHover.Click();
         }
 
-        public void ClicaPaginaProduto(int indexProduto)
+        public void ClicaPaginaProduto(int indexProduto = 1)
         {
-            action.MoveToElement(GetProdutosNaLista()[indexProduto - 1]).Perform();
-            botaoAbrePaginaProduto.Click();
+            //action.MoveToElement(GetProdutosNaLista()[indexProduto - 1]).Perform();
+            ListaProdutosNaHome()[indexProduto - 1].Click();
+            //botaoAbrePaginaProduto.Click();
+        }
+        
+        public IList<IWebElement> ListaProdutosNaHome()
+        {
+            return listaProdutos.FindElements(By.CssSelector("a[class=product-name]"));
         }
     }
 }

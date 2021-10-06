@@ -12,16 +12,14 @@ namespace SpecflowNunit
     public class Hooks
     {
         private IWebDriver webDriver;
-        public IWebDriver CriaDriver(bool headless = false, int timeout = 15)
+        public IWebDriver CriaDriver(bool headless = false, int timeout = 10)
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddUserProfilePreference("disable-popup-blocking", true);
             chromeOptions.AddArgument("--disable-notifications");
-            if (headless)
-            {
-                chromeOptions.AddArgument("--headless");
-            }
-            webDriver = new ChromeDriver(chromeOptions);
+            chromeOptions.AddArgument("--start-maximized");
+            if (headless) chromeOptions.AddArgument("--headless"); //TODO: Headless quebra os testes que dependem do navegador maximizado
+            webDriver = new ChromeDriver(chromeOptions);           //Estes são no caso os testes com adição de produtos ao carrinho.
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
             return webDriver;
         }
@@ -40,26 +38,28 @@ namespace SpecflowNunit
         [AfterStep]
         public void TakeScreenshot(ScenarioContext context)
         {
-            DateTime timeStamp = DateTime.Now;
-            string caminho = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\screenshots\\" + context.ScenarioInfo.Title));
-
-            if (!System.IO.Directory.Exists(caminho)) System.IO.Directory.CreateDirectory(caminho);
-
-            string fileName = context.ScenarioInfo.Title + "_" + timeStamp.ToString("dd_MM_yyyy-HH_mm_ss") + ".png";
-            var driver = context["WEB_DRIVER"] as ChromeDriver;
-
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            Dictionary<string, Object> metrics = new Dictionary<string, Object>
+            if (true)
             {
-                ["width"] = js.ExecuteScript("return Math.max(window.innerWidth,document.body.scrollWidth,document.documentElement.scrollWidth)"),
-                ["height"] = js.ExecuteScript("return Math.max(window.innerHeight,document.body.scrollHeight,document.documentElement.scrollHeight)"),
-                ["deviceScaleFactor"] = js.ExecuteScript("return window.devicePixelRatio"),
-                ["mobile"] = js.ExecuteScript("return typeof window.orientation !== 'undefined'")
-            };
-            driver.ExecuteChromeCommand("Emulation.setDeviceMetricsOverride", metrics);
-            driver.GetScreenshot().SaveAsFile(caminho + "//" + fileName, ScreenshotImageFormat.Png);
-            driver.ExecuteChromeCommand("Emulation.clearDeviceMetricsOverride", new Dictionary<string, Object>());
+                DateTime timeStamp = DateTime.Now;
+                string caminho = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\screenshots\\" + context.ScenarioInfo.Title));
 
+                if (!System.IO.Directory.Exists(caminho)) System.IO.Directory.CreateDirectory(caminho);
+
+                string fileName = context.ScenarioInfo.Title + "_" + timeStamp.ToString("dd_MM_yyyy-HH_mm_ss") + ".png";
+                var driver = context["WEB_DRIVER"] as ChromeDriver;
+
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                Dictionary<string, Object> metrics = new Dictionary<string, Object>
+                {
+                    ["width"] = js.ExecuteScript("return Math.max(window.innerWidth,document.body.scrollWidth,document.documentElement.scrollWidth)"),
+                    ["height"] = js.ExecuteScript("return Math.max(window.innerHeight,document.body.scrollHeight,document.documentElement.scrollHeight)"),
+                    ["deviceScaleFactor"] = js.ExecuteScript("return window.devicePixelRatio"),
+                    ["mobile"] = js.ExecuteScript("return typeof window.orientation !== 'undefined'")
+                };
+                driver.ExecuteChromeCommand("Emulation.setDeviceMetricsOverride", metrics);
+                driver.GetScreenshot().SaveAsFile(caminho + "//" + fileName, ScreenshotImageFormat.Png);
+                driver.ExecuteChromeCommand("Emulation.clearDeviceMetricsOverride", new Dictionary<string, Object>());
+            }
         }
 
     }

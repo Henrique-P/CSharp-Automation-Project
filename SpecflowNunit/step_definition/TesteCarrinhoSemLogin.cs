@@ -36,7 +36,6 @@ namespace SpecflowNunit.step_definition
             homePage.AdicionarProdutoAoCarrinho(indexProduto);
         }
 
-
         /*[When(@"adiciono o produto ao carrinho")]
         public void QuandoAdicionoOProdutoAoCarrinho()
         {
@@ -91,11 +90,10 @@ namespace SpecflowNunit.step_definition
             paginaProduto.AdicionarAoCarrinho();
         }
 
-
         [When(@"altero sua cor")]
         public void QuandoAlteroSuaCor()
         {
-            paginaProduto.SelecionaCor(1);
+            paginaProduto.SelecionaCor("Blue");
         }
 
         [Then(@"devo ver '(.*)' no produto dentro do carrinho")]
@@ -103,7 +101,5 @@ namespace SpecflowNunit.step_definition
         {
             Assert.True(paginaCarrinho.ValidaDetalhes().Equals(mensagemValidacao));
         }
-
-
     }
 }
